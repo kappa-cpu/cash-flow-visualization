@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="資産管理">
+  <meta name="theme-color" content="#1D9E75">
+  <title>資産管理アプリ</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="hdr">
+  <h1>
+    <i class="ti ti-chart-line" style="color:var(--accent);font-size:20px;"></i>資産管理アプリ
+  </h1>
+  <span id="saved" role="status" aria-live="polite">
+    <i class="ti ti-device-floppy"></i>保存済み
+  </span>
+</div>
+
+<div id="wrap">
+
+  <!-- 左パネル (入力) -->
+  <div id="lp">
+
+    <div class="sc">
+      <p class="st" style="margin-bottom:8px;">
+        <i class="ti ti-wallet" style="font-size:14px;"></i>現在の預金残高
+      </p>
+      <div class="row">
+        <input type="number" id="bal" value="500000" min="0" style="flex:1;font-size:18px;font-weight:500;" aria-label="現在の預金残高">
+        <span style="font-size:14px;color:var(--t1);">円</span>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sh">
+        <p class="st">
+          <i class="ti ti-briefcase" style="font-size:14px;"></i>バイト給与
+        </p>
+        <button id="addJobBtn" aria-label="バイト給与を追加">
+          <i class="ti ti-plus" style="font-size:13px;"></i>追加
+        </button>
+      </div>
+      <div id="jl" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <p id="nj" class="ni">バイトなし</p>
+    </div>
+
+    <div class="sc">
+      <div class="sh">
+        <p class="st">
+          <i class="ti ti-credit-card" style="font-size:14px;"></i>クレカ引き落とし
+        </p>
+        <button id="addCardBtn" aria-label="クレカ引き落としを追加">
+          <i class="ti ti-plus" style="font-size:13px;"></i>追加
+        </button>
+      </div>
+      <div id="cl" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <p id="nc" class="ni">カードなし</p>
+    </div>
+
+    <div class="sc">
+      <div class="sh">
+        <p class="st">
+          <i class="ti ti-calendar-event" style="font-size:14px;"></i>その他の入出金
+        </p>
+        <button id="addTxBtn" aria-label="その他の入出金を追加">
+          <i class="ti ti-plus" style="font-size:13px;"></i>追加
+        </button>
+      </div>
+      <div id="tl" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <p id="nt" class="ni">日付・金額を個別に入力</p>
+    </div>
+
+  </div>
+
+  <!-- 右パネル (グラフ) -->
+  <div id="rp">
+
+    <div class="sg">
+      <div class="sk"><p class="sl">現在の残高</p><p class="sv" id="s1">—</p></div>
+      <div class="sk"><p class="sl">最低残高（6ヶ月）</p><p class="sv" id="s2">—</p></div>
+      <div class="sk"><p class="sl">今月の収支</p><p class="sv" id="s3">—</p></div>
+    </div>
+
+    <div class="sc">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <p style="font-size:12px;color:var(--t1);">今後6ヶ月の残高推移</p>
+        <div style="display:flex;gap:10px;font-size:11px;color:var(--t1);">
+          <span style="display:flex;align-items:center;gap:3px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>入金
+          </span>
+          <span style="display:flex;align-items:center;gap:3px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#D85A30;display:inline-block;"></span>引き落とし
+          </span>
+        </div>
+      </div>
+      <div style="position:relative;height:230px;">
+        <canvas id="chart" aria-label="今後6ヶ月の残高推移グラフ"></canvas>
+      </div>
+    </div>
+
+    <div class="sc">
+      <p style="font-size:12px;color:var(--t1);margin-bottom:8px;font-weight:500;">直近の入出金予定</p>
+      <div id="el"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
